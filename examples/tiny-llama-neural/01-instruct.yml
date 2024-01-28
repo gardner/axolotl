@@ -8,11 +8,13 @@ load_in_4bit: false
 strict: false
 
 datasets:
-  - path: mhenrichsen/alpaca_2k_test
+  - path: teknium/openhermes
     type: alpaca
-dataset_prepared_path:
+
+dataset_prepared_path: ./dsprepare/teknium/openhermes
 val_set_size: 0.05
-output_dir: ./lora-out
+output_dir: ./TinyLlama-1.1B-Instruct-3T
+hub_model_id: gardner/TinyLlama-1.1B-Instruct-3T
 
 sequence_len: 4096
 sample_packing: true
@@ -26,11 +28,9 @@ lora_dropout: 0.05
 lora_target_linear: true
 lora_fan_in_fan_out:
 
-wandb_project:
-wandb_entity:
-wandb_watch:
-wandb_name:
-wandb_log_model:
+wandb_project: TinyLlama
+wandb_entity: gardner
+wandb_name: TinyLlama-1.1B-Instruct-3T
 
 gradient_accumulation_steps: 4
 micro_batch_size: 2
@@ -41,8 +41,8 @@ learning_rate: 0.0002
 
 train_on_inputs: false
 group_by_length: false
-bf16: auto
-fp16:
+bf16: true
+fp16: false
 tf32: false
 
 gradient_checkpointing: true

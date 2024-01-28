@@ -1,6 +1,8 @@
-base_model: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
+base_model: gardner/TinyLlama-1.1B-Instruct-3T
 model_type: LlamaForCausalLM
 tokenizer_type: LlamaTokenizer
+chat_template: chatml
+
 is_llama_derived_model: true
 
 load_in_8bit: true
@@ -8,11 +10,14 @@ load_in_4bit: false
 strict: false
 
 datasets:
-  - path: mhenrichsen/alpaca_2k_test
-    type: alpaca
-dataset_prepared_path:
+  - path: Open-Orca/SlimOrca-Dedup
+    type: sharegpt
+    split: train
+
+dataset_prepared_path: ./dsprepare/Open-Orca/SlimOrca-Dedup
 val_set_size: 0.05
-output_dir: ./lora-out
+output_dir: ./TinyLlama-1.1B-SlimOrca
+hub_model_id: gardner/TinyLlama-1.1B-SlimOrca
 
 sequence_len: 4096
 sample_packing: true
@@ -26,11 +31,9 @@ lora_dropout: 0.05
 lora_target_linear: true
 lora_fan_in_fan_out:
 
-wandb_project:
-wandb_entity:
-wandb_watch:
-wandb_name:
-wandb_log_model:
+wandb_project: TinyLlama
+wandb_entity: gardner
+wandb_name: TinyLlama-1.1B-SlimOrca
 
 gradient_accumulation_steps: 4
 micro_batch_size: 2
@@ -41,8 +44,8 @@ learning_rate: 0.0002
 
 train_on_inputs: false
 group_by_length: false
-bf16: auto
-fp16:
+bf16: true
+fp16: false
 tf32: false
 
 gradient_checkpointing: true
