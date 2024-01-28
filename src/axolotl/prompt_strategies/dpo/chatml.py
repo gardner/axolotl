@@ -1,4 +1,3 @@
-cat <<EOF > src/axolotl/prompt_strategies/dpo/chatml.py
 """
 DPO strategies for chatml
 """
@@ -168,5 +167,3 @@ def ultra(cfg):  # pylint: disable=possibly-unused-variable,unused-argument
         return sample
 
     return transform_fn
-
-EOF
